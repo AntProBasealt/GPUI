@@ -2,9 +2,12 @@
 #define LANGUAGEMANAGER_H
 
 #include <iostream>
+#include <memory>
 #include "languagemanagerprivate.h"
 
 namespace gpui {
+
+class LanguageManagerPrivate;
 
 class LanguageManager
 {
@@ -13,9 +16,12 @@ public:
     virtual ~LanguageManager();
 
 public:
-    LanguageManagerPrivate *d;
+    std::unique_ptr<LanguageManagerPrivate> d;
 
-	void addLang(const std::string &language);
+//    void langAdd(const std::string &language);
+	void langAdd();
+    void langDel();
+    void langClear();
 //	std::string language() const;
 
 private:

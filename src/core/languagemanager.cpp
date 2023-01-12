@@ -16,26 +16,36 @@
 
 namespace gpui
 {
-LanguageManager::LanguageManager()
+LanguageManager::LanguageManager() : d(std::make_unique<LanguageManagerPrivate>(this))
 {
 
 }
 
 LanguageManager::~LanguageManager()
 {
-    delete d;
+
 }
 
-void LanguageManager::addLang(const std::string &locale)
+void LanguageManager::langAdd()
 {
 //    d->addLang() = locale;
-    std::unique_ptr<QTranslator> qtTranslator = std::make_unique<QTranslator>();
-    qtTranslator->load(locale, "gui", "_", ":/");
-    std::unique_ptr<QTranslator> qtTranslator2 = std::make_unique<QTranslator>();
-    qtTranslator2->load(QString("qt_").append(QLocale::system().name()),
-                        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    QCoreApplication::installTranslator(qtTranslator.get());
-    QCoreApplication::installTranslator(qtTranslator2.get());
+//    std::unique_ptr<QTranslator> qtTranslator = std::make_unique<QTranslator>();
+//    qtTranslator->load(d.get()->locale, "gui", "_", ":/");
+//    std::unique_ptr<QTranslator> qtTranslator2 = std::make_unique<QTranslator>();
+//    qtTranslator2->load(QString("qt_").append(QLocale::system().name()),
+//                        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+//    QCoreApplication::installTranslator(qtTranslator.get());
+//    QCoreApplication::installTranslator(qtTranslator2.get());
+}
+
+void LanguageManager::langDel()
+{
+
+}
+
+void LanguageManager::langClear()
+{
+
 }
 
 }

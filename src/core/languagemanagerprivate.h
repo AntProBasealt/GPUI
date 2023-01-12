@@ -6,17 +6,21 @@
 
 namespace gpui
 {
+class LanguageManager;
 
 class LanguageManagerPrivate : public QObject
 {
     Q_OBJECT
 public:
-    QLocale locale;
+    LanguageManager *lang;
+//    QLocale locale;
 //    std::vector<std::unique_ptr<QTranslator>> translators{};
 //    LanguageManager *language;
 
 public slots:
     void addLang();
+    void delLang();
+    void clearLang();
 
 public:
     LanguageManagerPrivate(LanguageManager *langManager);
