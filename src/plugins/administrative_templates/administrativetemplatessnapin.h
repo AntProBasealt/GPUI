@@ -41,6 +41,8 @@ public:
 
     void onRetranslateUI(const std::string &locale) override;
 
+    std::vector<std::unique_ptr<QTranslator>> &getTranslators() const override;
+
 private:
     std::unique_ptr<AdministrativeTemplatesSnapInPrivate> d;
 };

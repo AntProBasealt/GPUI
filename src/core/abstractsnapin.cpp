@@ -129,9 +129,4 @@ void AbstractSnapIn::setCopyright(QString copyright)
     d->copyright = copyright;
 }
 
-QTranslator AbstractSnapIn::getTranslators()
-{
-
-}
-
 } // namespace gpui

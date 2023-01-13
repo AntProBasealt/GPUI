@@ -13,19 +13,7 @@ class LanguageManagerPrivate : public QObject
 {
     Q_OBJECT
 public:
-    LanguageManager *lang;
-    std::string langPath{};
-    std::vector<std::unique_ptr<QTranslator>> translators{};
-//    QLocale locale;
-//    LanguageManager *language;
-
-public:
-    void addLang(const std::string &path, const std::string &langPlace);
-    void delLang(const std::string &langPlace);
-    void clearLang();
-
-public:
-    LanguageManagerPrivate(LanguageManager *langManager);
+    LanguageManagerPrivate();
 
 private:
     LanguageManagerPrivate(const LanguageManagerPrivate &) = delete;      //copy ctor

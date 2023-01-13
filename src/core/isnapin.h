@@ -120,7 +120,7 @@ public:
     /**
      * @brief getTranslators return translator
      */
-    virtual QTranslator getTranslators() const = 0;
+    virtual std::vector<std::unique_ptr<QTranslator>> &getTranslators() const = 0;
 };
 
 } // namespace gpui

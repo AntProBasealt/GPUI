@@ -15,40 +15,55 @@
 #include "abstractsnapin.h"
 
 #include <QApplication>
+#include <QString>
 
 namespace gpui
 {
-LanguageManager::LanguageManager() : d(std::make_unique<LanguageManagerPrivate>(this))
+LanguageManager::LanguageManager() : d(std::make_unique<LanguageManagerPrivate>())
 {
 }
 
-void LanguageManager::langAdd(const std::string &langPath, AbstractSnapIn *snapIn)
+void LanguageManager::langAdd(std::string langPath, AbstractSnapIn *snapIn, const std::string &locale)
 {
+    langClear(snapIn);
 
-    d->langPath = langPath;
+    QString language = QString::fromStdString(locale).split("-")[0];
 
-    QLocale locale;
+    QDirIterator it(QString(langPath.c_str()), QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        if (!it.fileInfo().isFile())
+        {
+            it.hasNext();
+        }
 
-    std::unique_ptr<QTranslator> qtTranslator = std::make_unique<QTranslator>();
-    qtTranslator->load(locale, "gui", "_", ":/");
-    std::unique_ptr<QTranslator> qtTranslator2 = std::make_unique<QTranslator>();
-    qtTranslator2->load(QString("qt_").append(QLocale::system().name()),
-                        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    QCoreApplication::installTranslator(qtTranslator.get());
-    QCoreApplication::installTranslator(qtTranslator2.get());
+        if (it.fileName().endsWith(language + ".qm"))
+        {
+            std::unique_ptr<QTranslator> qtTranslator = std::make_unique<QTranslator>();
+            bool loadResult                           = qtTranslator->load(it.fileName(), ":/");
+            if (loadResult)
+            {
+                QCoreApplication::installTranslator(qtTranslator.get());
+                snapIn->getTranslators().push_back(std::move(qtTranslator));
+//                snapIn->
+            }
+        }
+
+        it.next();
+    }
 }
 
 void LanguageManager::langDel()
 {
 }
 
-void LanguageManager::langClear()
+void LanguageManager::langClear(AbstractSnapIn *snapIn)
 {
-    for (const auto &translator : d->translators)
+    for (const auto &translator : snapIn->getTranslators())
     {
         QCoreApplication::removeTranslator(translator.get());
     }
-        d->translators.clear();
+    snapIn->getTranslators().clear();
 }
 
 }

@@ -148,4 +148,9 @@ void PreferencesSnapIn::onRetranslateUI(const std::string &locale)
     d->retranslateModels(d->userPreferencesModels);
 }
 
+std::vector<std::unique_ptr<QTranslator> > &PreferencesSnapIn::getTranslators() const
+{
+    return d->translators;
+}
+
 } // namespace gpui

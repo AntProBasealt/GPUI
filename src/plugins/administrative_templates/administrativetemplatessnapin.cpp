@@ -374,11 +374,6 @@ void AdministrativeTemplatesSnapIn::onDataSave()
     d->onDataSave();
 }
 
-void AdministrativeTemplatesSnapIn::getTranslators()
-{
-    d->localeName;
-}
-
 void AdministrativeTemplatesSnapIn::onRetranslateUI(const std::string &locale)
 {
     for (const auto &translator : d->translators)
@@ -414,6 +409,11 @@ void AdministrativeTemplatesSnapIn::onRetranslateUI(const std::string &locale)
     d->localeName = locale;
     d->policyBundleLoad();
     setRootNode(static_cast<QAbstractItemModel *>(d->proxyModel.get()));
+}
+
+std::vector<std::unique_ptr<QTranslator> > &AdministrativeTemplatesSnapIn::getTranslators() const
+{
+    return d->translators;
 }
 
 } // namespace gpui

@@ -14,23 +14,15 @@ class LanguageManager
 {
 public:
     LanguageManager();
-//    virtual ~LanguageManager();
-    void langAdd(const std::string &langPath, AbstractSnapIn *snapIn);
+
+    void langAdd(std::string langPath, AbstractSnapIn *snapIn, const std::string &locale);
 
     void langDel();
 
-    void langClear();
+    void langClear(AbstractSnapIn *snapIn);
 
 private:
     std::unique_ptr<LanguageManagerPrivate> d;
-
-//    void langAdd(const std::string &language);
-
-//	std::string language() const;
-
-//private:
-//	LanguageManager(const LanguageManager &lang);
-//	const LanguageManager& operator=(const LanguageManager &lang);
 
 };
 }
