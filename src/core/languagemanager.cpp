@@ -23,9 +23,9 @@ LanguageManager::LanguageManager() : d(std::make_unique<LanguageManagerPrivate>(
 {
 }
 
-void LanguageManager::langAdd(std::string langPath, AbstractSnapIn *snapIn, const std::string &locale)
+void LanguageManager::add(std::string langPath, AbstractSnapIn *snapIn, const std::string &locale)
 {
-    langClear(snapIn);
+    clear(snapIn);
 
     QString language = QString::fromStdString(locale).split("-")[0];
 
@@ -53,11 +53,11 @@ void LanguageManager::langAdd(std::string langPath, AbstractSnapIn *snapIn, cons
     }
 }
 
-void LanguageManager::langDel()
+void LanguageManager::del()
 {
 }
 
-void LanguageManager::langClear(AbstractSnapIn *snapIn)
+void LanguageManager::clear(AbstractSnapIn *snapIn)
 {
     for (const auto &translator : snapIn->getTranslators())
     {

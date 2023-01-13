@@ -15,11 +15,11 @@ class LanguageManager
 public:
     LanguageManager();
 
-    void langAdd(std::string langPath, AbstractSnapIn *snapIn, const std::string &locale);
+    void add(std::string langPath, AbstractSnapIn *snapIn, const std::string &locale);
 
-    void langDel();
+    void del();
 
-    void langClear(AbstractSnapIn *snapIn);
+    void clear(AbstractSnapIn *snapIn);
 
 private:
     std::unique_ptr<LanguageManagerPrivate> d;
