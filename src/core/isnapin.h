@@ -27,6 +27,9 @@
 #include <QMainWindow>
 #include <QUuid>
 #include <QVersionNumber>
+#include <QTranslator>
+#include <vector>
+#include <memory>
 
 namespace gpui
 {
@@ -113,6 +116,11 @@ public:
      * @param locale locale to use in current snap-in.
      */
     virtual void onRetranslateUI(const std::string &locale) = 0;
+
+    /**
+     * @brief getTranslators return translator
+     */
+    virtual QTranslator getTranslators() const = 0;
 };
 
 } // namespace gpui

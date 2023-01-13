@@ -374,6 +374,11 @@ void AdministrativeTemplatesSnapIn::onDataSave()
     d->onDataSave();
 }
 
+void AdministrativeTemplatesSnapIn::getTranslators()
+{
+    d->localeName;
+}
+
 void AdministrativeTemplatesSnapIn::onRetranslateUI(const std::string &locale)
 {
     for (const auto &translator : d->translators)

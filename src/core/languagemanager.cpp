@@ -12,40 +12,43 @@
 #include "../gui/commandlineparser.h"
 #include "../gui/mainwindow.h"
 
+#include "abstractsnapin.h"
+
 #include <QApplication>
 
 namespace gpui
 {
 LanguageManager::LanguageManager() : d(std::make_unique<LanguageManagerPrivate>(this))
 {
-
 }
 
-LanguageManager::~LanguageManager()
+void LanguageManager::langAdd(const std::string &langPath, AbstractSnapIn *snapIn)
 {
 
-}
+    d->langPath = langPath;
 
-void LanguageManager::langAdd()
-{
-//    d->addLang() = locale;
-//    std::unique_ptr<QTranslator> qtTranslator = std::make_unique<QTranslator>();
-//    qtTranslator->load(d.get()->locale, "gui", "_", ":/");
-//    std::unique_ptr<QTranslator> qtTranslator2 = std::make_unique<QTranslator>();
-//    qtTranslator2->load(QString("qt_").append(QLocale::system().name()),
-//                        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-//    QCoreApplication::installTranslator(qtTranslator.get());
-//    QCoreApplication::installTranslator(qtTranslator2.get());
+    QLocale locale;
+
+    std::unique_ptr<QTranslator> qtTranslator = std::make_unique<QTranslator>();
+    qtTranslator->load(locale, "gui", "_", ":/");
+    std::unique_ptr<QTranslator> qtTranslator2 = std::make_unique<QTranslator>();
+    qtTranslator2->load(QString("qt_").append(QLocale::system().name()),
+                        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    QCoreApplication::installTranslator(qtTranslator.get());
+    QCoreApplication::installTranslator(qtTranslator2.get());
 }
 
 void LanguageManager::langDel()
 {
-
 }
 
 void LanguageManager::langClear()
 {
-
+    for (const auto &translator : d->translators)
+    {
+        QCoreApplication::removeTranslator(translator.get());
+    }
+        d->translators.clear();
 }
 
 }

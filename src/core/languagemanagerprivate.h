@@ -2,6 +2,7 @@
 #define LANGUAGEMANAGERPRIVATE_H
 
 #include <QObject>
+#include <QTranslator>
 #include "languagemanager.h"
 
 namespace gpui
@@ -13,13 +14,14 @@ class LanguageManagerPrivate : public QObject
     Q_OBJECT
 public:
     LanguageManager *lang;
+    std::string langPath{};
+    std::vector<std::unique_ptr<QTranslator>> translators{};
 //    QLocale locale;
-//    std::vector<std::unique_ptr<QTranslator>> translators{};
 //    LanguageManager *language;
 
-public slots:
-    void addLang();
-    void delLang();
+public:
+    void addLang(const std::string &path, const std::string &langPlace);
+    void delLang(const std::string &langPlace);
     void clearLang();
 
 public:
@@ -32,6 +34,6 @@ private:
     LanguageManagerPrivate operator=(LanguageManagerPrivate &&) = delete; //move assignment
 
 };
-}
+} //namespace gpui
 
 #endif // LANGUAGEMANAGERPRIVATE_H

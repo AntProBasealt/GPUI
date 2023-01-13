@@ -35,6 +35,7 @@ public:
     QVersionNumber version{};
     QString license{};
     QString copyright{};
+    QTranslator translator{};
 };
 
 QUuid AbstractSnapIn::getId() const
@@ -126,6 +127,11 @@ void AbstractSnapIn::setLicense(QString license)
 void AbstractSnapIn::setCopyright(QString copyright)
 {
     d->copyright = copyright;
+}
+
+QTranslator AbstractSnapIn::getTranslators()
+{
+
 }
 
 } // namespace gpui

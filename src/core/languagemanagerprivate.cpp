@@ -7,21 +7,22 @@ namespace gpui
 LanguageManagerPrivate::LanguageManagerPrivate(LanguageManager *language)
     :lang(language)
 {
-
 }
 
-void LanguageManagerPrivate::addLang()
+void LanguageManagerPrivate::addLang(const std::string &path, const std::string &langPlace)
 {
-    lang->langAdd();
+    Q_UNUSED(langPlace);
+
+    langPath=path;
 }
 
-void LanguageManagerPrivate::delLang()
+void LanguageManagerPrivate::delLang(const std::string &langPlace)
 {
-    lang->langDel();
+    Q_UNUSED(langPlace);
 }
 
 void LanguageManagerPrivate::clearLang()
 {
-    lang->langClear();
+//    lang->langClear();
 }
-}
+} // namespace gpui

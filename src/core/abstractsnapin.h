@@ -56,6 +56,8 @@ public:
 
     QString getCopyright() const override;
 
+    QTranslator getTranslators() const override;
+
 protected:
     AbstractSnapIn(QString type,
                    QString name,
