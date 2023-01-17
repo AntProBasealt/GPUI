@@ -2,12 +2,10 @@
 #define TRANSLATORSTORAGE_H
 
 #include "core.h"
-
 #include <QString>
 #include <QTranslator>
 #include <vector>
 #include <bits/unique_ptr.h>
-
 
 namespace gpui
 {
@@ -38,11 +36,8 @@ public:
      */
     static TranslatorStorage* instance()
     {
-        if (!p_instance)
-        {
-            p_instance = new TranslatorStorage();
-        }
-        return p_instance;
+        static TranslatorStorage s;
+        return &s;
     }
 
 private:    
@@ -56,12 +51,11 @@ private:
      * @param path - путь к файлу переводов если пустой, то заменяется на стандартный QLibraryInfo::location(QLibraryInfo::TranslationsPath).
      * @return - возвращает статус загрузки файла переводов true - успешно, false - нет.
      */
-    static bool loadQtTranslators(const QString& language, const QString& path);
+    bool loadQtTranslators(const QString& language,  QString path);
 
 private:
     std::vector<std::unique_ptr<QTranslator>> translators;
     // Это список файлов перевода.-> Возможно стоит перенести в Private class подумать, решение аргументировать.
-    static TranslatorStorage *p_instance;
 
 private:
     // Отключить кострукторы копирования и перемещеиния, а так же соответсвующие операторы.
