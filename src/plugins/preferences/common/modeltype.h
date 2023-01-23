@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
 **
-** Copyright (C) 2021 BaseALT Ltd. <org@basealt.ru>
+** Copyright (C) 2021-2023 BaseALT Ltd. <org@basealt.ru>
 **
 ** This program is free software; you can redistribute it and/or
 ** modify it under the terms of the GNU General Public License
@@ -18,16 +18,17 @@
 **
 ***********************************************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef GPUI_MODEL_TYPE_H
+#define GPUI_MODEL_TYPE_H
 
-const int GPUI_VERSION_MAJOR = ${GPUI_VERSION_MAJOR};
-const int GPUI_VERSION_MINOR = ${GPUI_VERSION_MINOR};
-const int GPUI_VERSION_PATCH = ${GPUI_VERSION_PATCH};
-
-inline QString getApplicationVersion()
+namespace preferences
 {
-    return QString("%1.%2.%3").arg(GPUI_VERSION_MAJOR).arg(GPUI_VERSION_MINOR).arg(GPUI_VERSION_PATCH);
+    enum ModelType
+    {
+        MACHINE = 0,
+        USER    = 1,
+        BOTH    = 2
+    };
 }
 
-#endif //VERSION_H
+#endif//GPUI_MODEL_TYPE_H

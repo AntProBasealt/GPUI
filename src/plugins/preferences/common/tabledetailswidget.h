@@ -23,6 +23,8 @@
 
 #include <QtWidgets>
 
+#include "modeltype.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
@@ -49,6 +51,7 @@ public:
     ~TableDetailsWidget() override;
 
     void setModel(ModelView::SessionModel *model);
+    void setModelType(ModelType newModelType);
 
 signals:
     void okPressed();
@@ -78,6 +81,8 @@ private:
     std::unique_ptr<QDataWidgetMapper> mapper;
 
     std::map<std::string, QString> itemTypes;
+
+    int modelType;
 };
 
 } // namespace preferences
